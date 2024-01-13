@@ -30,6 +30,12 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+enum UserRole{
+  ADMIN
+  USER
+  COACH
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -37,6 +43,24 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
+  role          UserRole @default(USER)
   accounts      Account[]
 }
 
+model VerificationToken{
+  id String @id @default(cuid())
+  email String
+  token String @unique
+  expires DateTime
+
+  @@unique([email,token])
+}
+
+model PasswordResetToken {
+  id String @id @default(cuid())
+  email String
+  token String @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
