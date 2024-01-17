@@ -4,6 +4,7 @@ import { db } from "@/lib/db"
 import { getUserById } from "@/data/user"
 import authConfig from "./auth.config"
 import { UserRole } from "@prisma/client"
+import { getAccountByUserId } from "./data/account"
 
 
 export const {
@@ -11,6 +12,7 @@ export const {
   auth,
   signIn,
   signOut,
+  update,
 } = NextAuth({
     pages:{
       signIn: "/auth/login",
@@ -48,16 +50,31 @@ export const {
         if (token.role && session.user){
           session.user.role = token.role as UserRole;
         }
+
+        if (session.user){
+          session.user.name=token.name;
+          session.user.email=token.email;
+          session.user.isOAuth= token.isOAuth as boolean;
+          session.user.image = token.picture;
+        }
+
         return session;
       },
       async jwt({ token }) {
+        console.log("I am being called again")
         if(!token.sub) return token;
 
         const existingUser = await getUserById(token.sub);
 
         if(!existingUser) return token;
 
+        const existingAccount = await getAccountByUserId(existingUser.id);
+
+        token.isOAuth = !!existingAccount;
+        token.name = existingUser.name;
+        token.email = existingUser.email;
         token.role = existingUser.role;
+        token.picture = existingUser.image;
 
         return token
       }

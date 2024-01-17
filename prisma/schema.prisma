@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
@@ -45,6 +46,7 @@ model User {
   password      String?
   role          UserRole @default(USER)
   accounts      Account[]
+  
 }
 
 model VerificationToken{
