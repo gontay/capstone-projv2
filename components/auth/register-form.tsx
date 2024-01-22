@@ -18,8 +18,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
-import { login } from "@/actions/login";
-import { register } from "@/actions/register";
+import { register } from "@/actions/auth/register";
 
 export const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>("");

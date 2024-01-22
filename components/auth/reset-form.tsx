@@ -18,7 +18,7 @@ import { Button } from "../ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import Link from "next/link";
-import { reset } from "@/actions/reset";
+import { reset } from "@/actions/auth/reset";
 
 export const ResetForm = () => {
     const [error, setError] = useState<string | undefined>("");

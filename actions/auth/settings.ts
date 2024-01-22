@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import {db} from "@/lib/db"
 import {update} from "@/auth";
 import { SettingsSchema } from "@/schemas";
-import { getUserByEmail, getUserById } from "@/data/user";
+import { getUserByEmail, getUserById } from "@/data/auth/user";
 import { currentUser } from "@/lib/auth";
 import { generateVerficationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";

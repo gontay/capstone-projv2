@@ -6,7 +6,7 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 import { generateVerficationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
-import { getUserByEmail } from "@/data/user";
+import { getUserByEmail } from "@/data/auth/user";
 
 export const login = async (values: z.infer<typeof LoginSchema>)=>{
     const validatedFields = LoginSchema.safeParse(values);

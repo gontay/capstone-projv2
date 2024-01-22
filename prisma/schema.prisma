@@ -44,6 +44,8 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
+  bio           String?
+  Coach         Coach?
   role          UserRole @default(USER)
   accounts      Account[]
   
@@ -65,4 +67,29 @@ model PasswordResetToken {
   expires DateTime
 
   @@unique([email, token])
+}
+
+enum CoachType{
+  COMMUNITY
+  PROFESSIONAL
+}
+
+enum CoachCertStatus{
+  APPROVED
+  PENDING
+  REJECTED
+}
+
+model Coach {
+  id               String             @id @default(cuid())
+  userId           String             @unique
+  user             User               @relation(fields: [userId], references: [id])
+  areaOfExpertise  String[]           @default(["general"])
+  coachType        CoachType          @default(COMMUNITY)
+  rate             Float
+  certification    String[]           @default([])
+  introduction     String?
+  video            String?
+  certified        Boolean           @default(false)
+  coachCertStatus  CoachCertStatus?
 }

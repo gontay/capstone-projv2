@@ -2,7 +2,7 @@
 import {v4 as uuidv4} from "uuid";
 import { currentUser } from "@/lib/auth";
 import storage from "@/lib/supabase";
-import { getUserById } from "@/data/user";
+import { getUserById } from "@/data/auth/user";
 import { db } from "@/lib/db";
 import { update } from "@/auth";
 
@@ -18,7 +18,7 @@ export const testBuckets = async(formData: FormData) =>{
         return {error: "Unauthorized"}
     }
 
-    const file = formData.get("image");
+    const file: File  = formData.get("image");
     const imageId = uuidv4()
     console.log("file",file);
 
@@ -54,5 +54,7 @@ export const testBuckets = async(formData: FormData) =>{
             image: updatedUser.image
         }
     })
+
+    return {success: "picture updated"}
 
 }

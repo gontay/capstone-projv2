@@ -22,6 +22,17 @@ export const authRoutes = [
     "/auth/new-password"
 ];
 
+/**
+* An array of routes that are used for authentication
+* These routes will redirect logged in coaches to /coach/dashboard
+* @type {string []}
+*/
+export const coachRoutes = [
+    "/coach/onboard",
+    "/coach/dashboard",
+    "/coach/dashboard/details"
+];
+
 
 /**
 * The prefix for API authentication routes
@@ -34,4 +45,11 @@ export const apiAuthPrefix = "/api/auth";
  * The default redirect path after logging in
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT = "/settings"
+export const DEFAULT_LOGIN_REDIRECT = "/"
+
+
+/**
+ * The default redirect path after logging in
+ * @type {string}
+ */
+export const DEFAULT_COACH_REDIRECT = "/coach/dashboard"

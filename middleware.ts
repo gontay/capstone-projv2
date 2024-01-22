@@ -3,9 +3,11 @@ import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import {
     DEFAULT_LOGIN_REDIRECT,
+    DEFAULT_COACH_REDIRECT,
     authRoutes,
     apiAuthPrefix,
-    publicRoutes
+    publicRoutes,
+    coachRoutes
 } from "@/routes"
 
 const { auth } = NextAuth(authConfig);

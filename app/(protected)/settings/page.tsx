@@ -33,12 +33,12 @@ import {
   SelectValue,
  } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { settings } from "@/actions/settings";
+import { settings } from "@/actions/auth/settings";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { UserRole } from "@prisma/client";
-import { testBuckets } from "@/actions/testupload";
+
 
 
 const SettingPage = () => {

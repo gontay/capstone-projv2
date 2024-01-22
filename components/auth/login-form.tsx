@@ -18,7 +18,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
-import { login } from "@/actions/login";
+import { login } from "@/actions/auth/login";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 

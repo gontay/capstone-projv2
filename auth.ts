@@ -1,10 +1,11 @@
 import NextAuth, {type DefaultSession} from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { db } from "@/lib/db"
-import { getUserById } from "@/data/user"
+import { getUserById } from "@/data/auth/user"
 import authConfig from "./auth.config"
 import { UserRole } from "@prisma/client"
-import { getAccountByUserId } from "./data/account"
+import { getAccountByUserId } from "./data/auth/account"
+import { getCoachByUserId } from "./data/coach/coach"
 
 
 export const {
@@ -58,10 +59,13 @@ export const {
           session.user.image = token.picture;
         }
 
+        if (session.user.role === UserRole.COACH){
+          session.user.coach = token.coach;
+        }
+
         return session;
       },
       async jwt({ token }) {
-        console.log("I am being called again")
         if(!token.sub) return token;
 
         const existingUser = await getUserById(token.sub);
@@ -75,6 +79,10 @@ export const {
         token.email = existingUser.email;
         token.role = existingUser.role;
         token.picture = existingUser.image;
+
+        if(existingUser.role === UserRole.COACH){
+          token.coach = await getCoachByUserId(existingUser.id)
+        }
 
         return token
       }
