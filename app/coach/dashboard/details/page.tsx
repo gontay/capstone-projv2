@@ -1,15 +1,12 @@
-'use client'
-import OnboardForm from '@/components/coach/onboard-form'
-import { useCurrentCoach } from '@/hooks/use-current-coach'
-import { useCurrentRole } from '@/hooks/use-current-role'
+
+import CoachUpdateForm from '@/components/coach/update-form'
 
 import React from 'react'
 
 const DetailsPage = () => {
-    const coach  = useCurrentCoach();
   return (
     <div>
-        {JSON.stringify(coach)}
+        <CoachUpdateForm/>
     </div>
   )
 }

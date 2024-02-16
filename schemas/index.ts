@@ -37,7 +37,8 @@ export const NewPasswordSchema  = z.object({
 
 export const SettingsSchema = z.object({
     name: z.optional(z.string()),
-    role: z.enum([UserRole.ADMIN, UserRole.USER]),
+    bio: z.optional(z.string()),
+    role: z.enum([UserRole.ADMIN, UserRole.USER, UserRole.COACH]),
     email: z.optional(z.string().email()),
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6))
@@ -64,9 +65,35 @@ export const SettingsSchema = z.object({
 
 export const CoachOnboardSchema = z.object(
     {
-        name: z.optional(z.string()),
         rate: z.number(),
         introduction: z.string(),
         expertises: z.array(z.string()).optional()
+    }
+)
+
+export const CoachUpdateSchema = z.object(
+    {
+        rate: z.number(),
+        introduction: z.string(),
+        expertises: z.array(z.string()).optional()
+    }
+)
+
+export const CoachRequestSchema = z.object(
+    {
+        message: z.string().optional()
+    }
+)
+
+
+export const CoachRejectSchema = z.object(
+    {
+        reason: z.string()
+    }
+)
+
+export const NoteEntrySchema = z.object(
+    {
+        content: z.string()
     }
 )

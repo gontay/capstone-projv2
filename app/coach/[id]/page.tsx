@@ -1,9 +1,15 @@
+import CoachProfile from "@/components/coach/coach-profile";
+import { getCoachProfile } from "@/lib/utils";
 
 
-const CoachDashBoardPage = () => {
+const CoachPage = async({params}:any) => {
+  const coachProfile = await getCoachProfile(params.id);
+
   return (
-    <div>CoachDashBoardPage</div>
+    <div>
+    <CoachProfile coach={coachProfile}/>
+    </div>
   )
 }
 
-export default CoachDashBoardPage
+export default CoachPage

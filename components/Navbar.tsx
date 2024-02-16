@@ -19,12 +19,12 @@ const Navbar = async() => {
             </div>
         ):( 
             <div>
-            <LoginButton>
+            <LoginButton mode='modal' action='register' asChild>
             <Button variant="link" className='mr-5'>Sign-up</Button>
             </LoginButton>
-            <Link href="/auth/login">
+            <LoginButton mode="modal" asChild>
             <Button variant="link" className='mr-5'>Log in</Button>
-            </Link>
+            </LoginButton>
             </div>
         )}
         </div>

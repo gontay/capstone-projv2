@@ -55,8 +55,10 @@ export const {
         if (session.user){
           session.user.name=token.name;
           session.user.email=token.email;
+          session.user.bio = token.bio;
           session.user.isOAuth= token.isOAuth as boolean;
           session.user.image = token.picture;
+          
         }
 
         if (session.user.role === UserRole.COACH){
@@ -79,6 +81,7 @@ export const {
         token.email = existingUser.email;
         token.role = existingUser.role;
         token.picture = existingUser.image;
+        token.bio = existingUser.bio;
 
         if(existingUser.role === UserRole.COACH){
           token.coach = await getCoachByUserId(existingUser.id)

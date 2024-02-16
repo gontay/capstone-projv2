@@ -25,6 +25,8 @@ import { FormSuccess } from "../form-success";
 import { Button } from "../ui/button";
 import { onboard } from "@/actions/coach/onboard";
 import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 const expertises = [
@@ -60,6 +62,8 @@ const OnboardForm = () => {
     const [success, setSuccess] = useState<string | undefined>("");
     const [ isPending, startTransition] =  useTransition();
     const user = useCurrentUser();
+    const { update } = useSession();
+    const router = useRouter();
     const form = useForm<z.infer<typeof CoachOnboardSchema>>({
         resolver :  zodResolver(CoachOnboardSchema),
         defaultValues:{
@@ -76,9 +80,15 @@ const OnboardForm = () => {
         startTransition(()=>{
             onboard(values)
             .then((data)=>{
-              setError(data.error)
-              setSuccess(data.success)
-              redirect("/coach/dashboard")
+              if(data.success){
+                update();
+                setSuccess(data.success);
+                router.refresh();
+                router.push('/coach/dashboard');
+              }
+              if(data.error){
+                setError(data.error)
+              }
           })
           })
     }

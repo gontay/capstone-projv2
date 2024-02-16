@@ -1,19 +1,21 @@
 'use client';
 
+import { Button } from "../ui/button";
 import { 
     Card,
     CardContent,
     CardFooter,
     CardHeader
  } from "../ui/card";
+import { DialogClose } from "../ui/dialog";
 import { BackButton } from "./back-button";
-import { Header } from "./header";
+import { Header } from "@/components/header";
 
 interface CardWrapperProps {
     children: React.ReactNode;
     headerLabel:  string;
-    backButtonLabel:  string;
-    backButtonHref: string;
+    backButtonLabel?:  string|undefined;
+    backButtonHref?: string;
 };
 
 export const CardWrapper = ({
@@ -30,12 +32,27 @@ export const CardWrapper = ({
             <CardContent>
                 {children}
             </CardContent>
-            <CardFooter>
-                <BackButton
-                    label ={backButtonLabel}
-                    href={backButtonHref}
-                />
-            </CardFooter>
+            {backButtonHref ? (
+                        <CardFooter>
+                            <BackButton
+                                label={backButtonLabel}
+                                href={backButtonHref}
+                            />
+                        </CardFooter>
+            ):(
+                <CardFooter>
+                    <DialogClose asChild>
+                    <Button 
+                        type="button" 
+                        variant="link"
+                        className="font-normal w-full"
+                        size="sm">
+                        Close
+                    </Button>
+                    </DialogClose>
+                </CardFooter>
+            )}
+
         </Card>
     )
 }

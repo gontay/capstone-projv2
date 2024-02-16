@@ -4,8 +4,10 @@ import React from 'react'
 import { Button } from './ui/button';
 import { BookUser, BookUserIcon, Mail, Target } from 'lucide-react';
 import { LoginButton } from './auth/login-button';
+import { useCurrentUser } from '@/hooks/use-current-user';
 
 const Hero = () => {
+    const user = useCurrentUser();
     const handleScroll = () => {
         const nextSection = document.getElementById("discover");
         
@@ -25,12 +27,20 @@ const Hero = () => {
                     Find the right coach and mentor
                     to reach your goals.
                 </p>
-                {/* <Link href="/sign-up">
-                </Link> */}
-                <LoginButton>
-                <Button className='bg-blue-500 mr-5 hover:bg-blue-950'><Target className="mr-2 h-4 w-4" /> Get Started</Button>
-                </LoginButton>
-                <Button className='bg-blue-500 mr-5 hover:bg-blue-950' onClick={handleScroll}><BookUserIcon className="mr-2 h-4 w-4" />Browse Coaches</Button>
+                {user ? (
+                    <>
+                        <Button className='bg-blue-500 mr-5 hover:bg-blue-950' onClick={handleScroll}><BookUserIcon className="mr-2 h-4 w-4" />Browse Coaches</Button>
+                    </>
+                ):(
+                    <>
+                    
+                    <Link href="/auth/register">
+                    <Button className='bg-blue-500 mr-5 hover:bg-blue-950'><Target className="mr-2 h-4 w-4" /> Get Started</Button>
+                    </Link>
+                    <Button className='bg-blue-500 mr-5 hover:bg-blue-950' onClick={handleScroll}><BookUserIcon className="mr-2 h-4 w-4" />Browse Coaches</Button>
+                    </>
+                )}
+                
                 
             </div>
 

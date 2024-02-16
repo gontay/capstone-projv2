@@ -30,7 +30,7 @@ export const UserButton = () => {
                 </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <Link href="/settings">
+                <Link href="/profile/myProfile">
                     <DropdownMenuItem>
                         <Settings className="h-4 w-4 mr-2"/>Settings
                     </DropdownMenuItem>

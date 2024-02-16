@@ -48,7 +48,8 @@ model User {
   Coach         Coach?
   role          UserRole @default(USER)
   accounts      Account[]
-  
+  requests      Request[]
+  notebooks     Notebook[]
 }
 
 model VerificationToken{
@@ -92,4 +93,67 @@ model Coach {
   video            String?
   certified        Boolean           @default(false)
   coachCertStatus  CoachCertStatus?
+  requests         Request[]
+  notebooks        Notebook[]
+}
+
+model Request{
+  id String @id @default(cuid())
+  requestorId     String
+  coachId         String            
+  message         String?
+  requestStatus   RequestStatus?
+  rejectionReason String?
+  requestor       User        @relation(fields: [requestorId], references: [id])
+  coach           Coach       @relation(fields: [coachId], references: [id])
+
+  @@unique([requestorId,coachId])
+}
+
+enum RequestStatus{
+  APPROVED
+  PENDING
+  REJECTED
+}
+
+model Notebook{
+  id              String @id @default(cuid())
+  coachId         String
+  clientId        String
+  client          User        @relation(fields: [clientId], references: [id])
+  coach           Coach       @relation(fields: [coachId], references: [id])
+  entry           NotebookEntry[]
+
+  @@unique([clientId,coachId])
+}
+
+model NotebookEntry{
+  id              String @id @default(cuid())
+  notebookId      String
+  datetime        DateTime @default(now())
+  content         String
+  notebook        Notebook @relation(fields: [notebookId], references: [id])
+}
+
+model Journal{
+  id  String @id @default(cuid())
+  authorId String
+  entry JournalEntry[]
+}
+
+
+
+model JournalEntry{
+  id  String @id @default(cuid())
+  journalId String
+  datetime  DateTime @default(now())
+  content   String
+  visibility Visibility?
+  journal Journal @relation(fields: [journalId], references: [id])
+}
+
+enum Visibility{
+  PRIVATE
+  PUBLIC
+  COACH
 }

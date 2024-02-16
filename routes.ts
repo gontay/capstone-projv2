@@ -5,7 +5,7 @@
 */
 export const publicRoutes = [
     "/",
-    "/auth/new-verification"
+    "/auth/new-verification",
 ];
 
 
@@ -30,7 +30,9 @@ export const authRoutes = [
 export const coachRoutes = [
     "/coach/onboard",
     "/coach/dashboard",
-    "/coach/dashboard/details"
+    "/coach/dashboard/details",
+    "/coach/dashboard/requests",
+    "/coach/dashboard/schedule"
 ];
 
 

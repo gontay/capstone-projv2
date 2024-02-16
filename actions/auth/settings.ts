@@ -15,8 +15,9 @@ import { sendVerificationEmail } from "@/lib/mail";
 export const settings = async(
     values: z.infer<typeof SettingsSchema>
 )=>{
+    console.log("settings triggered")
     const user  = await currentUser();
-
+    console.log("settings triggered")
     if (!user){
         return {error: "Unauthorized"}
     }
@@ -85,8 +86,9 @@ export const settings = async(
             name: updatedUser.name,
             email: updatedUser.email,
             role: updatedUser.role,
+            bio: updatedUser.bio,
         }
     })
-
+    console.log("updated")
     return {success: "Settings Updated!"}
 }
