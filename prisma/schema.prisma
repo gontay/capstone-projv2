@@ -131,8 +131,17 @@ model NotebookEntry{
   id              String @id @default(cuid())
   notebookId      String
   datetime        DateTime @default(now())
-  content         String
+  content         Json
+  clientVisibility Boolean @default(false)    
   notebook        Notebook @relation(fields: [notebookId], references: [id])
+}
+
+
+
+enum ContentType{
+  MDX
+  TXT
+  excalidraw
 }
 
 model Journal{
@@ -148,11 +157,11 @@ model JournalEntry{
   journalId String
   datetime  DateTime @default(now())
   content   String
-  visibility Visibility?
+  visibility JEntryVisibility?
   journal Journal @relation(fields: [journalId], references: [id])
 }
 
-enum Visibility{
+enum JEntryVisibility{
   PRIVATE
   PUBLIC
   COACH
