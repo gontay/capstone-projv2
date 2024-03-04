@@ -14,23 +14,30 @@ const UserProfile = async(
   return (
     <div>
     <Card className="w-[600px]">
-        <CardContent>
-        {image ?(<Image className='p-10'
+        <CardContent className=' flex items-center gap-2 p-2'>
+          <div className='p-2'>
+          {image ?(<Image className=''
         src={image}
-        width={500}
-        height={333}
+        width={200}
+        height={233}
         alt='test'/>):
         (
-        <Image className='p-10'
+        <Image className=''
             src={"/profile-avatar.jpg"}
-            width={500}
-            height={333}
+            width={200}
+            height={233}
             alt='test'/>
         ) }
-    
-
-        <p>{name}</p>
-        <p>{bio}</p>
+          </div>
+        
+        <div>
+          <p className='text-2xl font-extrabold'>{name}</p>
+          <div>
+          {bio? (<p>{bio}</p>):
+          (<p>{name} has not added a bio</p>)}
+          </div>
+        </div>
+        <div className=''>{bio}</div>
         </CardContent>
    
     </Card>

@@ -5,6 +5,7 @@ import { auth } from '@/auth'
 import './globals.css'
 import { Toaster } from '@/components/ui/sonner';
 import Navbar from '@/components/Navbar';
+import Provider from '@/components/Provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,11 +23,14 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
     <html lang="en">
+      <Provider>
       <body className={inter.className}>
         <Toaster/>
         <Navbar/>
         {children}
       </body>
+      </Provider>
+     
     </html>
     </SessionProvider>
 

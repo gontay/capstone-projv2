@@ -122,47 +122,7 @@ model Notebook{
   clientId        String
   client          User        @relation(fields: [clientId], references: [id])
   coach           Coach       @relation(fields: [coachId], references: [id])
-  entry           NotebookEntry[]
+  editorState     String
 
   @@unique([clientId,coachId])
-}
-
-model NotebookEntry{
-  id              String @id @default(cuid())
-  notebookId      String
-  datetime        DateTime @default(now())
-  content         Json
-  clientVisibility Boolean @default(false)    
-  notebook        Notebook @relation(fields: [notebookId], references: [id])
-}
-
-
-
-enum ContentType{
-  MDX
-  TXT
-  excalidraw
-}
-
-model Journal{
-  id  String @id @default(cuid())
-  authorId String
-  entry JournalEntry[]
-}
-
-
-
-model JournalEntry{
-  id  String @id @default(cuid())
-  journalId String
-  datetime  DateTime @default(now())
-  content   String
-  visibility JEntryVisibility?
-  journal Journal @relation(fields: [journalId], references: [id])
-}
-
-enum JEntryVisibility{
-  PRIVATE
-  PUBLIC
-  COACH
 }

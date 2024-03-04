@@ -1,3 +1,5 @@
+import { Prisma, RequestStatus } from "@prisma/client"
+
 export interface CoachProps{
     coachid: string,
     name: string,
@@ -22,6 +24,7 @@ export interface RequestProps{
     requestorId: string,
     requestorName: string,
     message: string,
+    requestStatus: RequestStatus
 }
 
 export interface clientProps{
@@ -30,4 +33,11 @@ export interface clientProps{
     name: string,
     image: string,
     bio: string,
+}
+
+export interface notebookProps{
+    id: string,
+    coachId: string,
+    clientId: string,
+    editorState: string,
 }

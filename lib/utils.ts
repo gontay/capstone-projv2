@@ -1,6 +1,6 @@
 import { getUserById } from "@/data/auth/user";
 import { getAllCoach, getCoachById, getCoachProfileByCoachId } from "@/data/coach/coach"
-import { getClientsByCoachId, getNotebookByClientId, getNotebookByCoachId } from "@/data/notebook/notebook";
+import { getClientsByCoachId, getNotebookByClientId, getNotebookByCoachId, getNotebookById } from "@/data/notebook/notebook";
 import { getRequestByCoachId } from "@/data/requests/request";
 import { CoachProps, RequestProps, UserProps, clientProps } from "@/types";
 import { type ClassValue, clsx } from "clsx"
@@ -72,6 +72,7 @@ export async function getRequests(id:string){
       requestorId: requests[r].requestorId,
       requestorName: requests[r].requestor.name,
       message: requests[r].message,
+      requestStatus: requests[r].requestStatus,
     }
     requestList.push(coachRequest)
   }
@@ -101,10 +102,15 @@ export async function getClients(id:string){
       clientId: clients[c].id,
       name: clients[c].client.name,
       image: clients[c].client.image,
-      bio: clients[c].client.bio
+      bio: clients[c].client.bio,
     }
     clientList.push(client)
     console.log(client)
   }
   return clientList;
+}
+
+export async function getNotebookbyId(id:string){
+  const notebook =  await getNotebookById(id);
+  return notebook
 }

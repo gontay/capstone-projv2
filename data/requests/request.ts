@@ -6,13 +6,14 @@ export const getRequestByCoachId = async(coachId : string)=>{
         const allRequests = await db.request.findMany({
             where:{
                 coachId: coachId,
-                requestStatus: RequestStatus.PENDING
+                //requestStatus: RequestStatus.PENDING
             },
             select:{
                 id: true,
                 coachId: true,
                 requestorId: true,
                 message: true,
+                requestStatus: true,
                 requestor:{
                     select:{
                         name: true

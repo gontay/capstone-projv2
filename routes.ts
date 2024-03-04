@@ -34,7 +34,8 @@ export const coachRoutes = [
     "/coach/dashboard",
     "/coach/dashboard/details",
     "/coach/dashboard/requests",
-    "/coach/dashboard/schedule"
+    "/coach/dashboard/schedule",
+    "/coach/dashboard/clients"
 ];
 
 

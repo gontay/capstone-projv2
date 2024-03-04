@@ -4,7 +4,10 @@ const CoachDashboardLayout =  ({children}: {children: React.ReactNode}) => {
     return(
        
         <div className="flex w-full bg-slate-50">
-         <SideMenubar/>
+        <div className="w-1/7">
+            <SideMenubar/>
+        </div>
+        
             <div className="items-center justify-center">
                 {children}
             </div>

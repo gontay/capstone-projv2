@@ -22,7 +22,7 @@ export const getNotebookByCoachId = async(coachId : string)=>{
 
 export const getClientsByCoachId = async(coachId : string)=>{
     try{
-        const clients = await db.notebook.findMany({ where : {coachId},
+        const clients = await db.notebook.findMany({ where : {coachId: coachId},
         select:{
             id:true,
             clientId: true,
@@ -40,3 +40,11 @@ export const getClientsByCoachId = async(coachId : string)=>{
     }
   };
   
+  export const getNotebookById = async(id : string)=>{
+    try{
+        const notebook = await db.notebook.findUnique({ where: {id}});
+        return notebook;
+    }catch{
+        return null;
+    }
+};

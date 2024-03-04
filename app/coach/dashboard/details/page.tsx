@@ -5,7 +5,7 @@ import React from 'react'
 
 const DetailsPage = () => {
   return (
-    <div>
+    <div className='mx-3 justify-center'>
         <CoachUpdateForm/>
     </div>
   )

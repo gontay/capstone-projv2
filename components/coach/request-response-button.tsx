@@ -8,14 +8,19 @@ import RejectForm from './reject-form'
 import { AcceptRequest } from '@/actions/coach/acceptRequest'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { UndoRequest } from '@/actions/coach/undoRequest'
 
 interface RequestResponseButtonProps{
-    type?: "Accept"| "Reject",
+    type?: "Accept"| "Reject" |"Undo",
+    variant?: "default"|"outline"|"link",
+    className?: string
     requestId: string
 }
 
 const RequestResponseButton = ({
         type =  "Accept",
+        className,
+        variant = "default",
         requestId,
     }:RequestResponseButtonProps) => {
     const router = useRouter();
@@ -25,6 +30,20 @@ const RequestResponseButton = ({
             AcceptRequest(requestId).then((data)=> {
                 if(data.error){
                     toast.error(data.error);
+                    router.refresh();
+                }
+                if(data.success){
+                    toast.success(data.success);
+                    router.refresh();
+                }
+            });
+        }
+        if(type === "Undo"){
+            console.log(requestId)
+            UndoRequest(requestId).then((data)=> {
+                if(data.error){
+                    toast.error(data.error);
+                    router.refresh();
                 }
                 if(data.success){
                     toast.success(data.success);
@@ -33,17 +52,22 @@ const RequestResponseButton = ({
             });
         }
     }
+    if(type === "Undo"){
+        return (
+        <Button className= {className} variant={variant} onClick={handleClick}>Undo</Button>
+        )
+    }
 
     if(type === "Accept"){
         return (
-        <Button className='bg-emerald-600' onClick={handleClick}><Check className='text-white'/></Button>
+        <Button className= {className} variant={variant} onClick={handleClick}>Accept</Button>
         )
     }
     if(type === "Reject"){
         return (
             <Dialog>
         <DialogTrigger>
-            <Button className='bg-red-600'><X className='text-white'/></Button>
+            <Button className= {className} variant={variant}>Reject</Button>
         </DialogTrigger>
         <DialogContent className="p-0 w-auto bg-transparent border-none">
             <RejectForm requestId={requestId}/>

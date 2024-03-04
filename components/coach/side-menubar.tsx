@@ -10,7 +10,7 @@ import { User } from 'lucide-react'
 const SideMenubar = async() => {
     const user = await currentUser();
   return (
-    <ul className="daisy-menu bg-base-200 w-56 h-full">
+    <ul className="daisy-menu bg-base-200 h-full">
   <li>
     <div>
         <Link href={`/coach/dashboard`}>
