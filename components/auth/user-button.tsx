@@ -6,7 +6,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { User,LogOut, Settings, Target } from "lucide-react";
+import { User,LogOut, Settings, Target, NotebookPen } from "lucide-react";
 import {
     Avatar,
     AvatarImage,
@@ -32,7 +32,12 @@ export const UserButton = () => {
             <DropdownMenuContent>
                 <Link href="/profile/myProfile">
                     <DropdownMenuItem>
-                        <Settings className="h-4 w-4 mr-2"/>Settings
+                        <User className="h-4 w-4 mr-2"/>My Profile
+                    </DropdownMenuItem>
+                </Link>
+                <Link href="/profile/myJournal">
+                    <DropdownMenuItem>
+                        <NotebookPen className="h-4 w-4 mr-2"/>My Journal
                     </DropdownMenuItem>
                 </Link>
                 {user?.role !== UserRole.COACH && (

@@ -13,15 +13,16 @@ import { Button } from "@/components/ui/button";
 import axios from "axios"
 import Text from "@tiptap/extension-text";
 import { useDebounce } from "@/hooks/use-debounce";
-import { notebookProps } from "@/types";
+import { UserProps, clientProps, notebookProps } from "@/types";
 
 interface EditorProps{
   notebook: notebookProps
-
+  client: UserProps
 }
 
-const TipTapEditor = ({notebook}: EditorProps) => {
-    const [editorState, setEditorState] = React.useState(notebook.editorState||'');
+const TipTapEditor = ({notebook,client}: EditorProps) => {
+  console.log(client.name)
+    const [editorState, setEditorState] = React.useState(notebook.editorState||`<h1>${client.name}</h1>`);
     const saveNote = useMutation({
       mutationFn: async () => {
         const res = await axios.post("/api/Note/saveNote", {
@@ -79,7 +80,7 @@ const TipTapEditor = ({notebook}: EditorProps) => {
           {saveNote.isPending ? "Saving..." : "Saved"}
         </Button>
         </div>
-        <div className="prose">
+        <div className="prose p-2">
           <EditorContent editor={editor} />
         </div>
       </div>

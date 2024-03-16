@@ -61,6 +61,7 @@ const OnboardForm = () => {
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [ isPending, startTransition] =  useTransition();
+    const [wordCount, setWordCount]= useState<number>(0);
     const user = useCurrentUser();
     const { update } = useSession();
     const router = useRouter();
@@ -107,7 +108,7 @@ const OnboardForm = () => {
         <FormField
           control={form.control}
           name="introduction"
-          render={({ field }) => (
+          render={({ field: {onChange, value} }) => (
             <FormItem>
               <FormLabel>Introduction</FormLabel>
               <FormControl>
@@ -115,9 +116,14 @@ const OnboardForm = () => {
                   disabled={isPending}
                   placeholder="Give a brief summary of yourself! I am a personal coach! I will improve your life..."
                   className="resize-none"
-                  {...field}
+                  defaultValue={value}
+                  onChange={(e)=> {
+                    onChange(e.target.value)
+                    setWordCount(e.target.value.length)
+                  }}
                 />
               </FormControl>
+              <p>{wordCount}/1000 Char</p>
               <FormMessage />
             </FormItem>
           )}

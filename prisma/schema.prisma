@@ -50,6 +50,7 @@ model User {
   accounts      Account[]
   requests      Request[]
   notebooks     Notebook[]
+  entries       Entry[]
 }
 
 model VerificationToken{
@@ -95,6 +96,7 @@ model Coach {
   coachCertStatus  CoachCertStatus?
   requests         Request[]
   notebooks        Notebook[]
+  ratings          Rating[]
 }
 
 model Request{
@@ -125,4 +127,26 @@ model Notebook{
   editorState     String
 
   @@unique([clientId,coachId])
+}
+
+
+model Entry{
+  id  String @id @default(cuid())
+  userId  String
+  user  User  @relation(fields: [userId], references: [id])
+  title String
+  content String
+  dateTimeCreated DateTime @default(now())
+  privacy Boolean
+}
+
+
+
+model Rating{
+  id String @id @default(cuid())
+  authorId String
+  coachId String
+  coach Coach @relation(fields: [coachId], references: [id])
+  stars Int
+  content String
 }

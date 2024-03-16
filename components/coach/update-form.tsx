@@ -24,8 +24,9 @@ import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { Button } from "../ui/button";
 import { onboard } from "@/actions/coach/onboard";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { updateCoachDetails } from "@/actions/coach/updateCoachDetails";
+
 
 
 const expertises = [
@@ -57,10 +58,13 @@ const expertises = [
 
 
 const CoachUpdateForm = () => {
+
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [ isPending, startTransition] =  useTransition();
     const user = useCurrentUser();
+    const router = useRouter();
+    const [wordCount, setWordCount]= useState<number>(user?.coach.introduction?.length);
     const form = useForm<z.infer<typeof CoachUpdateSchema>>({
         resolver :  zodResolver(CoachUpdateSchema),
         defaultValues:{
@@ -79,10 +83,11 @@ const CoachUpdateForm = () => {
             .then((data)=>{
               setError(data.error)
               setSuccess(data.success)
-              redirect("/coach/dashboard")
+              router.refresh();
           })
           })
     }
+
   return (
     <CardWrapper
         headerLabel='Update Details Coach!'
@@ -98,7 +103,7 @@ const CoachUpdateForm = () => {
         <FormField
           control={form.control}
           name="introduction"
-          render={({ field }) => (
+          render={({ field: {value, onChange}}) => (
             <FormItem>
               <FormLabel>Introduction</FormLabel>
               <FormControl>
@@ -106,9 +111,15 @@ const CoachUpdateForm = () => {
                   disabled={isPending}
                   placeholder="Give a brief summary of yourself! I am a personal coach! I will improve your life..."
                   className="resize-none"
-                  {...field}
+                  defaultValue={value}
+                  onChange={(e)=> {
+                    onChange(e.target.value)
+                    setWordCount(e.target.value.length)
+                  }}
+                  
                 />
               </FormControl>
+              <p>{wordCount}/1000 Char</p>
               <FormMessage />
             </FormItem>
           )}

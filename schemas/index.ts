@@ -37,7 +37,7 @@ export const NewPasswordSchema  = z.object({
 
 export const SettingsSchema = z.object({
     name: z.optional(z.string()),
-    bio: z.optional(z.string()),
+    bio: z.optional(z.string().max(1000)),
     role: z.enum([UserRole.ADMIN, UserRole.USER, UserRole.COACH]),
     email: z.optional(z.string().email()),
     password: z.optional(z.string().min(6)),
@@ -66,7 +66,7 @@ export const SettingsSchema = z.object({
 export const CoachOnboardSchema = z.object(
     {
         rate: z.number(),
-        introduction: z.string(),
+        introduction: z.string().max(1000),
         expertises: z.array(z.string()).optional()
     }
 )
@@ -92,8 +92,10 @@ export const CoachRejectSchema = z.object(
     }
 )
 
-export const NoteEntrySchema = z.object(
+export const JournalEntrySchema = z.object(
     {
-        content: z.string()
+        title: z.string(),
+        content: z.string(),
+        privacy: z.boolean()
     }
 )

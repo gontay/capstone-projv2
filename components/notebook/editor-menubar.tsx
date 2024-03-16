@@ -12,6 +12,7 @@ import {
   Italic,
   List,
   ListOrdered,
+  ListTodo,
   Quote,
   Redo,
   Strikethrough,
@@ -97,6 +98,12 @@ const TipTapMenuBar = ({ editor }: { editor: Editor }) => {
       >
         <ListOrdered className="w-6 h-6" />
       </button>
+      <button
+        onClick={() => editor.chain().focus().toggleTaskList().run()}
+        className={editor.isActive("taskList") ? "is-active" : ""}>
+        <ListTodo className="w-6 h-6" />
+      </button>
+
       <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={editor.isActive("codeBlock") ? "is-active" : ""}

@@ -41,3 +41,12 @@ export interface notebookProps{
     clientId: string,
     editorState: string,
 }
+
+export interface entryProps{
+    id: string,
+    userId: string,
+    title: string,
+    content: string,
+    dateTimeCreated: Date,
+    privacy: boolean,
+}

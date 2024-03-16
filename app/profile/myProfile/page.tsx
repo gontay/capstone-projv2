@@ -8,7 +8,6 @@ const MyProfilePage = () => {
         <ProfileSettingPage/>
         <ProfilePictureUpload/>
         
-        
     </div>
   )
 }

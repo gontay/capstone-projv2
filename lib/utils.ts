@@ -1,8 +1,9 @@
 import { getUserById } from "@/data/auth/user";
 import { getAllCoach, getCoachById, getCoachProfileByCoachId } from "@/data/coach/coach"
+import { getJournalEntriesbyUserId, getPublicJournalEntriesbyUserId } from "@/data/journal/journal";
 import { getClientsByCoachId, getNotebookByClientId, getNotebookByCoachId, getNotebookById } from "@/data/notebook/notebook";
 import { getRequestByCoachId } from "@/data/requests/request";
-import { CoachProps, RequestProps, UserProps, clientProps } from "@/types";
+import { CoachProps, RequestProps, UserProps, clientProps, entryProps } from "@/types";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -113,4 +114,39 @@ export async function getClients(id:string){
 export async function getNotebookbyId(id:string){
   const notebook =  await getNotebookById(id);
   return notebook
+}
+
+export async function getPublicJournalEntries(id:string) {
+  const entryList=[];
+  const entries = await getPublicJournalEntriesbyUserId(id);
+  for(var i in entries){
+    var entry: entryProps = {
+    id: entries[i].id,
+    userId: entries[i].userId,
+    title: entries[i].title,
+    content: entries[i].content,
+    dateTimeCreated: entries[i].dateTimeCreated,
+    privacy: entries[i].privacy,
+    }
+    entryList.push(entry)
+  }
+  return entryList
+}
+
+export async function getJournalEntries(id:string) {
+  const entryList=[];
+  const entries = await getJournalEntriesbyUserId(id);
+  console.log("db", entries)
+  for(var i in entries){
+    var entry: entryProps = {
+    id: entries[i].id,
+    userId: entries[i].userId,
+    title: entries[i].title,
+    content: entries[i].content,
+    dateTimeCreated: entries[i].dateTimeCreated,
+    privacy: entries[i].privacy,
+    }
+    entryList.push(entry)
+  }
+  return entryList
 }

@@ -42,7 +42,7 @@ export const updateCoachDetails = async(values: z.infer<typeof CoachUpdateSchema
         }
     })
 
-        return {success: "Coach Profile Created"}
+        return {success: "Profile Updated!"}
 }
 
 

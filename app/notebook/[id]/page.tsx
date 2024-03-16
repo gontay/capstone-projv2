@@ -7,6 +7,9 @@ import React from 'react'
 const page = async({params}:any) => {
   //retreive notebook
   const notebook = await getNotebookbyId(params.id)
+  if(!notebook){
+    redirect("/")
+  }
   const userProfile = await getUserProfile(notebook?.clientId)
   console.log("notebook",notebook)
   if(!notebook || !userProfile){
@@ -21,7 +24,7 @@ const page = async({params}:any) => {
 
         </div>
         <div className='border-stone-200 shadow-xl border rounded-lg px-16 py-8 w-full'>
-          {notebook && <TipTapEditor notebook={notebook}/>}
+          {notebook && <TipTapEditor notebook={notebook} client={userProfile}/>}
         </div>
       </div>
     </div>
