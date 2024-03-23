@@ -51,6 +51,7 @@ model User {
   requests      Request[]
   notebooks     Notebook[]
   entries       Entry[]
+  ratings          Rating[]
 }
 
 model VerificationToken{
@@ -141,12 +142,20 @@ model Entry{
 }
 
 
-
 model Rating{
   id String @id @default(cuid())
   authorId String
   coachId String
   coach Coach @relation(fields: [coachId], references: [id])
-  stars Int
-  content String
+  author User @relation(fields: [authorId], references: [id])
+  rating  Int
+  review String?
+}
+
+enum Stars{
+ VERYBAD
+ BAD
+ FAIR
+ GOOD
+ VERYGOOD
 }

@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
 import { CreateEntry } from "@/actions/journal/createEntry";
+import { useRouter } from "next/navigation";
 
 const NewEntryForm = () => {
 
@@ -21,6 +22,7 @@ const NewEntryForm = () => {
     const [success, setSuccess] = useState<string | undefined>("");
     const [ isPending, startTransition] =  useTransition();
     const [wordCount, setWordCount]= useState<number>(0);
+    const router = useRouter()
     const form = useForm<z.infer<typeof JournalEntrySchema>>({
         resolver: zodResolver(JournalEntrySchema),
         defaultValues:{
@@ -37,6 +39,7 @@ const NewEntryForm = () => {
             .then((data)=>{
                 setError(data.error)
                 setSuccess(data.success)
+                router.refresh()
             });
         })
     }

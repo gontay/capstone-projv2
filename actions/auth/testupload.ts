@@ -18,7 +18,7 @@ export const testBuckets = async(formData: FormData) =>{
         return {error: "Unauthorized"}
     }
     console.log(formData)
-    const file : File  = formData.get("image");
+    const file : File = formData.get("image");
     const imageId = uuidv4()
     // console.log("file",file);
 

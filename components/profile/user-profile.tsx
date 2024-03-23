@@ -37,7 +37,6 @@ const UserProfile = async(
           (<p>{name} has not added a bio</p>)}
           </div>
         </div>
-        <div className=''>{bio}</div>
         </CardContent>
    
     </Card>

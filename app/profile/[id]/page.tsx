@@ -1,3 +1,4 @@
+import Entrydisplay from "@/components/journal/entry-display";
 import UserProfile from "@/components/profile/user-profile";
 import { getUserProfile } from "@/lib/utils";
 
@@ -9,7 +10,7 @@ const UserPage = async({params}:any) => {
     <div>
     <UserProfile user={userProfile}/>
       <div>
-        JOURNAL DISPLAY
+        <Entrydisplay type="public" userId={params.id}/>
       </div> 
     </div>
   )

@@ -1,4 +1,4 @@
-import { UserRole } from "@prisma/client";
+import { UserRole} from "@prisma/client";
 import * as z from "zod";
 
 export const LoginSchema  = z.object({
@@ -97,5 +97,12 @@ export const JournalEntrySchema = z.object(
         title: z.string(),
         content: z.string(),
         privacy: z.boolean()
+    }
+)
+
+export const RatingSchema = z.object(
+    {
+        rating: z.number().gt(0).lte(5),
+        review: z.string().optional()
     }
 )

@@ -7,8 +7,7 @@ const CoachDashboardLayout =  ({children}: {children: React.ReactNode}) => {
         <div className="w-1/7">
             <SideMenubar/>
         </div>
-        
-            <div className="items-center justify-center">
+            <div className="w-fit items-center justify-center">
                 {children}
             </div>
 

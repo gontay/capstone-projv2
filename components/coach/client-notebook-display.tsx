@@ -16,8 +16,9 @@ const ClientNotebookDisplay = async({
     const clients : clientProps[] = await getClients(coachId)
     console.log("clients", clients)
   return (
-    <div className='grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-2 px-2'>
+    <>
     <h1>Your Clients</h1>
+    <div className='grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-2 px-2'>
     {
         clients.map((client)=>
         <div className='daisy-card w-[200px] bg-slate-100 shadow-lg' key={client.id}>
@@ -47,6 +48,8 @@ const ClientNotebookDisplay = async({
         </div>
     )}
 </div>
+    </>
+    
   )
 
 }

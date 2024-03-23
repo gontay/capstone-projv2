@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
  
 html,
 body,
@@ -90,4 +91,41 @@ body,
 .is-active {
   background-color: #dadada;
   border-radius: 2px;
+}
+
+.fc-day {
+  @apply m-8;
+}
+
+.fc-scrollgrid-sync-table {
+  @apply w-full;
+}
+
+.fc-view {
+  @apply w-full h-full lg:h-3/4 xl:h-2/3 bg-white;
+}
+
+.fc-h-event {
+  @apply bg-slate-500 border border-slate-600 ;
+  
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-slate-100 ;
+}
+
+.fc .fc-button{
+  @apply bg-slate-800 hover:bg-slate-900  ;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  @apply bg-slate-600;
+}
+
+.fc .fc-button-primary:disabled {
+  @apply bg-slate-600;
+}
+.fc-v-event {
+  @apply bg-slate-500 border border-slate-600 ;
+  
 }

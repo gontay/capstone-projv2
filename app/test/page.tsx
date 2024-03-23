@@ -1,10 +1,15 @@
-import TipTapEditor from '@/components/editor'
-import Tiptap from '@/components/test/Editor'
-import React from 'react'
+
+
+import dynamic from 'next/dynamic';
+
+
+const Scheduler = dynamic(()=> import('@/components/test/scheduler'), {ssr: false,})
 
 const page = () => {
     return(
-        <TipTapEditor/>
+        <div>
+            <Scheduler/>
+        </div>
     )
   
 }

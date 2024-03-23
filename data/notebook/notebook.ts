@@ -48,3 +48,45 @@ export const getClientsByCoachId = async(coachId : string)=>{
         return null;
     }
 };
+
+export const getNotebookByCoachIdAndUserId = async(coachId : string, clientId: string)=>{
+    try{
+        const coachNotebooks = await db.notebook.findMany({ 
+            where :{
+                AND:{
+                    clientId,
+                    coachId
+                }
+            } 
+        });
+        return coachNotebooks;
+    }catch{
+        return null;
+    }
+  };
+
+  export const getCoachesByClientId = async(clientId : string)=>{
+    try{
+        const coaches = await db.notebook.findMany({ where : {clientId},
+        select:{
+            coachId: true,
+            coach:{
+                select:{
+                    introduction: true,
+                    rate: true,
+                    areaOfExpertise: true,
+                    user:{
+                        select:{
+                            name :true,
+                            image: true
+                    }
+                }
+            }
+        }}
+    });
+        console.log(coaches)
+        return coaches;
+    }catch{
+        return null;
+    }
+  };

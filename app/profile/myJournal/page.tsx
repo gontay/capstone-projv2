@@ -21,7 +21,7 @@ const MyJournalPage = async() => {
         
         <div className='daisy-divider min-w-full'></div>
         <div>
-          <Entrydisplay userId={user?.id}/>
+          <Entrydisplay userId={user?.id} type='profile'/>
         </div>
     </div>
   )

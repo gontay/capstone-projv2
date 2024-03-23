@@ -7,7 +7,6 @@ export interface CoachProps{
     introduction: string,
     expertise: string[],
     image: string,
-    // rating?: number,
 }
 
 export interface UserProps{
@@ -49,4 +48,12 @@ export interface entryProps{
     content: string,
     dateTimeCreated: Date,
     privacy: boolean,
+}
+
+export interface ratingProps{
+    id: string,
+    authorId: string,
+    coachId: string
+    rating: number,
+    review: string,
 }

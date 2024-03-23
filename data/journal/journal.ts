@@ -19,7 +19,6 @@ export const getJournalEntriesbyUserId = async(userId : string) =>{
         const Entries = db.entry.findMany({
             where:{
                 userId,
-                privacy: false
             }
         })
         return Entries

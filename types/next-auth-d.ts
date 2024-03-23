@@ -5,7 +5,7 @@ export type ExtendedUser =  DefaultSession["user"] & {
     role: UserRole
     isOAuth: boolean;
     coach: Coach;
-    bio: string | null;
+    bio: unknown | string ;
 };
 
 declare module "next-auth"{

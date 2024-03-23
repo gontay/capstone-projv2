@@ -1,9 +1,10 @@
 import { getUserById } from "@/data/auth/user";
 import { getAllCoach, getCoachById, getCoachProfileByCoachId } from "@/data/coach/coach"
 import { getJournalEntriesbyUserId, getPublicJournalEntriesbyUserId } from "@/data/journal/journal";
-import { getClientsByCoachId, getNotebookByClientId, getNotebookByCoachId, getNotebookById } from "@/data/notebook/notebook";
+import { getClientsByCoachId, getCoachesByClientId, getNotebookByClientId, getNotebookByCoachId, getNotebookByCoachIdAndUserId, getNotebookById } from "@/data/notebook/notebook";
+import { getAverageRatingByCoachId, getRatingsbyCoachid } from "@/data/ratings/ratings";
 import { getRequestByCoachId } from "@/data/requests/request";
-import { CoachProps, RequestProps, UserProps, clientProps, entryProps } from "@/types";
+import { CoachProps, RequestProps, UserProps, clientProps, entryProps, ratingProps } from "@/types";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -136,7 +137,6 @@ export async function getPublicJournalEntries(id:string) {
 export async function getJournalEntries(id:string) {
   const entryList=[];
   const entries = await getJournalEntriesbyUserId(id);
-  console.log("db", entries)
   for(var i in entries){
     var entry: entryProps = {
     id: entries[i].id,
@@ -149,4 +149,53 @@ export async function getJournalEntries(id:string) {
     entryList.push(entry)
   }
   return entryList
+}
+
+export async function checkCoachRelationship(coachId: string, clientId:string){
+  const notebook = await getNotebookByCoachIdAndUserId(coachId,clientId)
+  console.log(notebook)
+  if(notebook?.length === 0){
+    console.log(false)
+    return false
+  }
+  return true
+}
+
+export async function getRatings(id:string) {
+  const ratingList=[];
+  const ratings = await getRatingsbyCoachid(id);
+  for(var i in ratings){
+    var rating: ratingProps = {
+    id: ratings[i].id,
+    authorId: ratings[i].authorId,
+    rating: ratings[i].rating,
+    review: ratings[i].review,
+    }
+    ratingList.push(rating)
+  }
+  return ratingList
+}
+
+export async function getAverageRatings(id: string){
+  const avgratings = await getAverageRatingByCoachId(id)
+  
+  return avgratings._avg.rating
+}
+
+export async function getAllCoachbyUserId (id: string){
+  const coachList = []
+  const coaches = await getCoachesByClientId(id)
+
+  for (var i in coaches){
+    var coach: CoachProps = {
+      coachid: coaches[i].coachId,
+      name: coaches[i].coach.user.name,
+      rate: coaches[i].coach.rate,
+      introduction: coaches[i].coach.introduction,
+      expertise: coaches[i].coach.areaOfExpertise,
+      image: coaches[i].coach.user.image
+    }
+    coachList.push(coach)
+  }
+  return coachList
 }

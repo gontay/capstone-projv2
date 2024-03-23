@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { EditorContent, useEditor } from "@tiptap/react";
 import { StarterKit } from "@tiptap/starter-kit";
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios"
 import Text from "@tiptap/extension-text";
 import { useDebounce } from "@/hooks/use-debounce";
-import { UserProps, clientProps, notebookProps } from "@/types";
+import { UserProps, notebookProps } from "@/types";
 
 interface EditorProps{
   notebook: notebookProps
@@ -59,7 +59,7 @@ const TipTapEditor = ({notebook,client}: EditorProps) => {
   const debouncedEditorState = useDebounce(editorState, 500);
 
 
-  React.useEffect(()=>{
+  useEffect(()=>{
     if (debouncedEditorState === '')return
     saveNote.mutate(undefined, {
       onSuccess: data => {

@@ -26,7 +26,6 @@ const SideMenubar = async() => {
     <ul>
       <li><Link href="/coach/dashboard/details">Update Details</Link></li>
       <li><Link href="/coach/dashboard/certify">Get Certified</Link></li>
-      <li><Link href="/coach/dashboard/schedule">Schedule</Link></li>
       <li><Link href="/coach/dashboard/requests">Client Requests</Link></li>
       <li><Link href="/coach/dashboard/clients">My Clients</Link></li>
     </ul>

@@ -19,7 +19,7 @@ export const uploadCertificate = async(formData: FormData) =>{
         return {error: "Unauthorized"}
     }
 
-    const fileList: FileList = formData.getAll('fileList');
+    const fileList = formData.getAll('fileList');
     
     for (const file of fileList){
         var fileId = uuidv4()
