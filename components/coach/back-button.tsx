@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 interface BackButtonProps {
     href?:  string;
-    label:  string;
+    label?:  string;
 }
 
 

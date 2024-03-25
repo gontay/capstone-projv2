@@ -9,6 +9,7 @@ import { getUserByEmail } from "@/data/auth/user";
 
 
 export default {
+  trustHost: true,
   providers: [
     Github({
       clientId:  process.env.GITHUB_CLIENT_ID,

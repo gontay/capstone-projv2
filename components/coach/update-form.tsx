@@ -64,7 +64,10 @@ const CoachUpdateForm = () => {
     const [ isPending, startTransition] =  useTransition();
     const user = useCurrentUser();
     const router = useRouter();
-    const [wordCount, setWordCount]= useState<number>(user?.coach.introduction?.length);
+    const [wordCount, setWordCount]= useState<number | undefined>(user?.coach.introduction?.length);
+    if(wordCount === undefined){
+      setWordCount(0)
+    }
     const form = useForm<z.infer<typeof CoachUpdateSchema>>({
         resolver :  zodResolver(CoachUpdateSchema),
         defaultValues:{

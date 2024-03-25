@@ -3,7 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { db } from "@/lib/db"
 import { getUserById } from "@/data/auth/user"
 import authConfig from "./auth.config"
-import { UserRole } from "@prisma/client"
+import { Coach, UserRole } from "@prisma/client"
 import { getAccountByUserId } from "./data/auth/account"
 import { getCoachByUserId } from "./data/coach/coach"
 
@@ -57,12 +57,12 @@ export const {
           session.user.bio = token.bio;
           session.user.isOAuth= token.isOAuth as boolean;
           session.user.image = token.picture;
-          
+          if (session.user.role === UserRole.COACH){
+            session.user.coach = token.coach as Coach;
+          }
         }
 
-        if (session.user.role === UserRole.COACH){
-          session.user.coach = token.coach;
-        }
+
 
         return session;
       },
@@ -74,6 +74,7 @@ export const {
         if(!existingUser) return token;
 
         const existingAccount = await getAccountByUserId(existingUser.id);
+        const userCoach = await getCoachByUserId(existingUser.id)
 
         token.isOAuth = !!existingAccount;
         token.name = existingUser.name;
@@ -81,10 +82,11 @@ export const {
         token.role = existingUser.role;
         token.picture = existingUser.image;
         token.bio = existingUser.bio;
-
+        
         if(existingUser.role === UserRole.COACH){
-          token.coach = await getCoachByUserId(existingUser.id)
+          token.coach = userCoach;
         }
+
 
         return token
       }

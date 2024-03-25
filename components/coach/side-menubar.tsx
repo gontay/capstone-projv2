@@ -14,12 +14,20 @@ const SideMenubar = async() => {
   <li>
     <div>
         <Link href={`/coach/dashboard`}>
+        {user?.image? (
         <Avatar>
             <AvatarImage src={user?.image} alt="@shadcn"/>
             <AvatarFallback className="bg-slate-400">
                         <User className="text-white"/>
                     </AvatarFallback>
         </Avatar>
+        ):(        
+        <Avatar>
+          <AvatarFallback className="bg-slate-400">
+                      <User className="text-white"/>
+                  </AvatarFallback>
+      </Avatar>)}
+        
         <h2 className="daisy-menu-title">{user?.name}</h2>
         </Link>
     </div>
