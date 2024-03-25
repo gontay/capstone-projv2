@@ -18,7 +18,7 @@ const EntryCard = ({entry}:EntryCardProps) => {
         <p>{content}</p>
         </div>
         <div className='justify-end text-right'>
-          <p className='text-xs'>Written on: {dateTimeCreated.toLocaleString('en-GB', { timeZone: 'UTC' })}</p>
+          <p className='text-xs'>Written on: {dateTimeCreated.toLocaleString('en-GB', { timeZone: 'Asia/Singapore' })}</p>
         </div>
       </div>
     </div>
