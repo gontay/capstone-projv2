@@ -17,8 +17,13 @@ export const testBuckets = async(formData: FormData) =>{
     if (!dbUser){
         return {error: "Unauthorized"}
     }
-    console.log(formData)
-    const file : File = formData.get("image");
+    if(!formData.get("image") || formData.get("image") === null){
+        return {error: "no file"}
+    }
+    const file = formData.get("image");
+    if(file === null){
+        return {error: "no file"}
+    }
     const imageId = uuidv4()
     // console.log("file",file);
 
