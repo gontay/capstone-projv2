@@ -33,6 +33,7 @@ const RejectForm = ({requestId}: RejectFormProps) => {
 })
   const onSubmit =(values: z.infer<typeof CoachRejectSchema>) => {
     console.log(values.reason,requestId);
+    startTransition(()=>{
     RejectRequest(requestId, values).then(
       (data)=>{
         if(data.success){
@@ -40,6 +41,7 @@ const RejectForm = ({requestId}: RejectFormProps) => {
           router.refresh();
         }
       })
+    })
     
 
   }
