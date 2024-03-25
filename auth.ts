@@ -7,7 +7,6 @@ import { UserRole } from "@prisma/client"
 import { getAccountByUserId } from "./data/auth/account"
 import { getCoachByUserId } from "./data/coach/coach"
 
-
 export const {
   handlers: { GET, POST },
   auth,
