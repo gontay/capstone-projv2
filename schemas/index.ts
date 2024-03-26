@@ -95,7 +95,7 @@ export const CoachRejectSchema = z.object(
 export const JournalEntrySchema = z.object(
     {
         title: z.string(),
-        content: z.string(),
+        content: z.string().max(1000),
         privacy: z.boolean()
     }
 )
