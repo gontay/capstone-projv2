@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Prototype is live
 
-check it out on [https://gontay.xyz] (https://gontay.xyz)
+check it out on [https://gontay.xyz](https://gontay.xyz)
