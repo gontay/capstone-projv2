@@ -1,5 +1,5 @@
 "use client"
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { RingLoader} from "react-spinners";
@@ -21,8 +21,11 @@ export const NewVerificationForm = () => {
         }
         newVerification(token)
         .then((data)=>{
-            setSuccess(data.success);
-            setError(data.error)
+            if(data.success){
+                setSuccess(data.success);
+                redirect('/auth/login')
+            }
+            setError(data.error);
         }).catch(()=>{
             setError("Something went wrong!");
         });
