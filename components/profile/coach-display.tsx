@@ -5,6 +5,7 @@ import { CoachProps } from '@/types'
 import React from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
 import Link from 'next/link'
+import { Card, CardContent, CardHeader } from '../ui/card'
 
 const CoachDisplay = async() => {
 const user = await currentUser()
@@ -13,8 +14,14 @@ if(!user){
 }
 const coaches: CoachProps[] = await getAllCoachbyUserId(user?.id)
   return (
+    <Card className="w-[600px]">
+    <CardHeader>
+        <p className="text-2xl font-semibold text-center">
+            My Coaches
+        </p>
+    </CardHeader>
+    <CardContent >
     <div>
-    <h1>My Coaches</h1>
     <Table>
         <TableHeader>
             <TableRow>
@@ -33,6 +40,8 @@ const coaches: CoachProps[] = await getAllCoachbyUserId(user?.id)
         </TableBody>
     </Table>
     </div>
+    </CardContent>
+    </Card>
   )
 }
 

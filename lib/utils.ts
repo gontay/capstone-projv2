@@ -1,10 +1,10 @@
 import { getUserById } from "@/data/auth/user";
-import { getAllCoach, getCoachById, getCoachProfileByCoachId } from "@/data/coach/coach"
+import { getAllCoach, getCoachNameById, getCoachProfileByCoachId } from "@/data/coach/coach"
 import { getJournalEntriesbyUserId, getPublicJournalEntriesbyUserId } from "@/data/journal/journal";
 import { getClientsByCoachId, getCoachesByClientId, getNotebookByClientId, getNotebookByCoachId, getNotebookByCoachIdAndUserId, getNotebookById } from "@/data/notebook/notebook";
 import { getAverageRatingByCoachId, getRatingsbyCoachid } from "@/data/ratings/ratings";
-import { getRequestByCoachId } from "@/data/requests/request";
-import { CoachProps, RequestProps, UserProps, clientProps, entryProps, ratingProps } from "@/types";
+import { getRequestByClientId, getRequestByCoachId } from "@/data/requests/request";
+import { ClientRequestProps, CoachProps, RequestProps, UserProps, clientProps,entryProps, ratingProps } from "@/types";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -77,6 +77,26 @@ export async function getRequests(id:string){
       requestStatus: requests[r].requestStatus,
     }
     requestList.push(coachRequest)
+  }
+  console.log(requestList);
+  return requestList;
+}
+
+export async function getClientRequests(id:string){
+  const requestList = [];
+  const requests =  await getRequestByClientId(id);
+  for (var r in requests){
+    const coach = await getCoachNameById(requests[r].coachId)
+    var clientRequest: ClientRequestProps = 
+    {
+      id: requests[r].id,
+      coachId : requests[r].coachId,
+      requestorId: requests[r].requestorId,
+      coachName: coach?.user.name,
+      rejectionReason: requests[r].rejectionReason,
+      requestStatus: requests[r].requestStatus,
+    }
+    requestList.push(clientRequest)
   }
   console.log(requestList);
   return requestList;

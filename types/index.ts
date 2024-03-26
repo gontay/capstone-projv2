@@ -57,3 +57,12 @@ export interface ratingProps{
     rating: number,
     review: string,
 }
+
+export interface ClientRequestProps{
+    id: string,
+    coachId: string,
+    requestorId: string,
+    coachName: string,
+    rejectionReason? : string,
+    requestStatus: RequestStatus
+}

@@ -27,6 +27,31 @@ export const getRequestByCoachId = async(coachId : string)=>{
     }
 }
 
+export const getRequestByClientId = async(clientId : string)=>{
+    try{
+        const allRequests = await db.request.findMany({
+            where:{
+                requestorId: clientId,
+                OR:[
+                    {requestStatus: RequestStatus.PENDING},
+                    {requestStatus: RequestStatus.REJECTED}
+                ]
+            },
+            select:{
+                id: true,
+                coachId: true,
+                requestorId: true,
+                message: true,
+                requestStatus: true,
+                rejectionReason: true
+            }
+        })
+        return allRequests
+    }catch{
+        return null;
+    }
+}
+
 
 export const getExistingRequest = async(userId : string, coachId: string)=>{
     try{

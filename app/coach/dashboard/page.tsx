@@ -1,5 +1,7 @@
+import ReviewTable from '@/components/coach/review-table';
 import { currentUser } from '@/lib/auth'
-import { getAverageRatings } from '@/lib/utils';
+import { getAverageRatings, getRatings } from '@/lib/utils';
+import { ratingProps } from '@/types';
 import { redirect } from 'next/navigation';
 import React from 'react'
 
@@ -9,25 +11,27 @@ const CoachDashboardPage = async() => {
     redirect('/coach/onboard');
   }
   const rating = await getAverageRatings(session.coach.id)
+  
   return (
     <div>
-      CoachDashboardPage
-      <div className='grid grid-cols-2 p-3'>
-        <div className="daisy-card w-96 bg-neutral text-neutral-content m-3">
-        <div className="daisy-card-body items-center text-center">
-          <h2 className="daisy-card-title">What my clients are saying!</h2>
-          <p>$100</p>
-        </div>
-      </div>
-      <div className="daisy-card w-96 bg-neutral text-neutral-content m-3">
+      <div className='grid grid-cols-1 text-center p-3 space-x-2 space-y-2'>
+        
+        <div className="daisy-card w-96 bg-slate-100 shadow-lg">
         <div className="daisy-card-body items-center text-center">
           <h2 className="daisy-card-title">My rating</h2>
-          <p>{rating}</p>
+          {rating ? (
+        <div>
+        {rating}/5
+        </div>):(
+          <div>
+            no rating yet
+          </div>
+        )}
         </div>
       </div>
+      <ReviewTable/>
       </div>
-
-    </div>
+      </div>
   )
 }
 

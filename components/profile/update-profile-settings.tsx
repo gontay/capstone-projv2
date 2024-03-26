@@ -84,7 +84,7 @@ const ProfileSettingPage = () => {
     <Card className="w-[600px]">
       <CardHeader>
           <p className="text-2xl font-semibold text-center">
-            ⚙️ Settings
+            ⚙️ My Details
           </p>
       </CardHeader>
       <CardContent>

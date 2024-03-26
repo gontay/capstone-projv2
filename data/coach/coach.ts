@@ -10,10 +10,17 @@ export const getCoachByUserId = async(userId : string)=>{
     }
 };
 
-export const getCoachById = async(id : string)=>{
+export const getCoachNameById = async(id : string)=>{
   try{
-      const coach = await db.coach.findUnique({ where : {id}});
-      return coach;
+      const coachName = await db.coach.findUnique({ where : {id},
+      select:{
+        user:{
+          select: {
+            name: true
+          }
+        }
+      }});
+      return coachName;
   }catch{
       return null;
   }
