@@ -199,7 +199,7 @@ export async function getRatings(id:string) {
 export async function getAverageRatings(id: string){
   const avgratings = await getAverageRatingByCoachId(id)
   
-  return avgratings._avg.rating
+  return avgratings
 }
 
 export async function getAllCoachbyUserId (id: string){

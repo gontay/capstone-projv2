@@ -19,7 +19,7 @@ export const getAverageRatingByCoachId = async(coachId: string)=>{
             _avg:{rating:true},
             where:{coachId}
         })
-        return ratings
+        return ratings._avg.rating
     }catch{
         return false
     }
