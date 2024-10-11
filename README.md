@@ -1,3 +1,5 @@
+The project is still being hosted on [https://capstone-projv2.vercel.app/](https://capstone-projv2.vercel.app/)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
